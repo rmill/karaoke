@@ -37,6 +37,30 @@ app.post('/song', (req, res) => {
   console.log('Song added', songQueue);
 });
 
+app.put('/song', (req, res) => {
+  const userId = req.headers.authorization;
+
+  if (!userId) {
+    res.status(401).end();
+    return;
+  }
+
+  if (!hasSong(userId)) {
+    res.status(404).end();
+    return;
+  }
+
+  for (let song of songQueue) {
+    if (song.userId = userId) {
+      song.url = req.body.url;
+      song.name = req.body.name;
+    }
+  }
+
+  res.end();
+  console.log('Song Changed', songQueue);
+});
+
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!')
 })

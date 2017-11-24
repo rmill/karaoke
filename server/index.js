@@ -61,6 +61,27 @@ app.put('/song', (req, res) => {
   console.log('Song Changed', songQueue);
 });
 
+app.delete('/song', (req, res) => {
+  const userId = req.headers.authorization;
+
+  if (!userId) {
+    res.status(401).end();
+    return;
+  }
+
+  if (!hasSong(userId)) {
+    res.status(404).end();
+    return;
+  }
+
+  for (let i of songQueue.keys()) {
+    if (songQueue[i].userId === userId) songQueue.splice(i, 1);
+  }
+
+  res.end();
+  console.log('Song deleted', songQueue);
+});
+
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!')
 })

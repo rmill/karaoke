@@ -1,0 +1,46 @@
+==== IDEAS ====
+
+Server
+- Add song request
+-- Only one song per user
+-- Send 405 if already have one
+- Change song request
+-- overwrite current song
+- Remove song request
+-- Remove your song
+- Get song queue
+-- Return all songs in queue
+
+Desktop client
+- (1) Request song from server
+-- If no song
+--- Go to rest state
+--- Request song every 5 seconds
+--- When video, goto (2)
+-- (2) If video
+--- Play the video
+--- When video done
+--- Remove song from queue
+--- goto (1)
+
+Web client
+- Enter url
+- Server serves webapp
+- If name, goto (3)
+- If no name
+-- Show sign in
+-- Enter name or signin with facebook
+- (3) Show search screen
+-- Search video
+-- Show results
+-- Pick song
+--- If already have song
+---- Ask to change song
+-- Send song to server
+- Show song queue
+--- Get songs queue from server
+--- Link to cancel your song
+--- Link to change your song
+--- Highlight your song
+--- Show time to each song
+--- Show thumbnail of song

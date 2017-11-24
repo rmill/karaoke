@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser');
 const express = require('express')
+const {authenticate, changeSong, deleteSong, songExists, getSong} = require('./lib');
 const app = express()
 
 app.use(bodyParser.json());
@@ -12,84 +13,33 @@ app.get('/songs', (req, res) => {
   res.end(JSON.stringify(songQueue));
 })
 
-app.post('/song', (req, res) => {
-  const userId = req.headers.authorization;
+app.post('/song', authenticate, (req, res) => {
+  // A user may only have one song
+  if (songExists(req.body.userId, songQueue)) return res.status(409).end();
 
-  if (!userId) {
-    res.status(401).end();
-    return;
-  }
-
-  if (hasSong(userId)) {
-    res.status(409).end();
-    return;
-  }
-
-  const song = {
-    name: req.body.name,
-    url: req.body.url,
-    userId,
-    userName: req.body.user
-  };
-
-  songQueue.push(song);
+  // Add the song to the queue
+  songQueue.push(getSong(req.body, songQueue));
   res.end();
-  console.log('Song added', songQueue);
 });
 
-app.put('/song', (req, res) => {
-  const userId = req.headers.authorization;
+app.put('/song', authenticate, (req, res) => {
+  // Song must exist to change
+  if (!songExists(req.body.userId, songQueue)) return res.status(404).end();
 
-  if (!userId) {
-    res.status(401).end();
-    return;
-  }
-
-  if (!hasSong(userId)) {
-    res.status(404).end();
-    return;
-  }
-
-  for (let song of songQueue) {
-    if (song.userId = userId) {
-      song.url = req.body.url;
-      song.name = req.body.name;
-    }
-  }
-
+  // Change the user's song
+  changeSong(req.body.userId, req.body, songQueue);
   res.end();
-  console.log('Song Changed', songQueue);
 });
 
-app.delete('/song', (req, res) => {
-  const userId = req.headers.authorization;
+app.delete('/song', authenticate, (req, res) => {
+  // Song must exist to delete
+  if (!songExists(req.body.userId, songQueue)) return res.status(404).end();
 
-  if (!userId) {
-    res.status(401).end();
-    return;
-  }
-
-  if (!hasSong(userId)) {
-    res.status(404).end();
-    return;
-  }
-
-  for (let i of songQueue.keys()) {
-    if (songQueue[i].userId === userId) songQueue.splice(i, 1);
-  }
-
+  // Delete the song
+  deleteSong(req.body.userId, songQueue);
   res.end();
-  console.log('Song deleted', songQueue);
 });
 
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!')
 })
-
-function hasSong(userId) {
-  for (let song of songQueue) {
-    if (song.userId === userId) return true;
-  }
-
-  return false;
-}

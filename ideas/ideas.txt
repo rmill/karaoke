@@ -12,16 +12,20 @@ Server
 -- Return all songs in queue
 
 Desktop client
-- (1) Request song from server
--- If no song
---- Go to rest state
---- Request song every 5 seconds
---- When video, goto (2)
--- (2) If video
---- Play the video
---- When video done
---- Remove song from queue
---- goto (1)
+- Poll song list
+-- goto IDLE
+
+- IDLE
+-- If song in list
+--- goto PLAY
+
+- PLAY
+-- If no songs
+--- goto IDLE
+-- If song is different
+--- goto PLAY
+-- If song ends
+--- delete song
 
 Web client
 - Enter url

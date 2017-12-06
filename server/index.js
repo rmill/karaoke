@@ -1,10 +1,12 @@
 "use strict"
 
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const express = require('express')
 const {authenticate, changeSong, deleteSong, songExists, getSong} = require('./lib');
 const app = express()
 
+app.use(cors());
 app.use(bodyParser.json());
 
 const songQueue = [];

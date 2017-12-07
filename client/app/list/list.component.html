@@ -1,0 +1,5 @@
+<div *ngFor="let song of songs">
+  <span><{{song.name}}</span>
+</div>
+<div *ngIf="songs.length === 0">There are no songs!</div>
+<button [routerLink]="['/search']">I want to sing!</button>

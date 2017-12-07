@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import YouTubePlayer from 'youtube-player';
 
-import { KaraokeService, Song } from '../services/karaoke.service';
+import { KaraokeService, Song } from '../../../lib/karaoke.service';
 
 const UNSTARTED = -1;
 const ENDED = 0;

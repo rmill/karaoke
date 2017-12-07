@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { KaraokeService, Song } from '../services/karaoke.service';
+import { KaraokeService, Song } from '../../../lib/karaoke.service';
 
 @Component({
   selector: 'karaoke-idle',

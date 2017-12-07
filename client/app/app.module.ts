@@ -4,21 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { IdleComponent } from './idle/idle.component';
-import { PlayerComponent } from './player/player.component';
+import { ListComponent } from './list/list.component';
+import { SearchComponent } from './search/search.component';
 import { KaraokeService } from '../../lib/karaoke.service';
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/idle' },
-  { path: 'idle', component: IdleComponent },
-  { path: 'player', component: PlayerComponent }
+  { path: '', pathMatch: 'full', redirectTo: '/list' },
+  { path: 'list', component: ListComponent },
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    IdleComponent,
-    PlayerComponent,
+    ListComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

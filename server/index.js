@@ -11,6 +11,11 @@ app.use(bodyParser.json());
 
 const songQueue = [];
 
+app.post('/next', (req, res) => {
+  songQueue.shift();
+  res.end();
+});
+
 app.get('/songs', (req, res) => {
   res.end(JSON.stringify(songQueue));
 })

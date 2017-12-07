@@ -12,7 +12,7 @@ function authenticate(req, res, next) {
 function changeSong(userId, newSong, songQueue) {
   for (let song of songQueue) {
     if (song.userId = userId) {
-      song.url = newSong.url;
+      song.id = newSong.id;
       song.name = newSong.name;
     }
   }
@@ -27,7 +27,7 @@ function deleteSong(userId, songQueue) {
 function getSong(data) {
   return {
     name: data.name,
-    url: data.url,
+    id: data.id,
     userId: data.userId,
     userName: data.userName
   };

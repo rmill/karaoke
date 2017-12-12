@@ -60,4 +60,8 @@ export class KaraokeService {
 
 export interface Song {
   id: string;
+  name: string;
+  thumbnail: string;
+  user: string;
+  videoId: string;
 }

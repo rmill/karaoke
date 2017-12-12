@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import YouTubePlayer from 'youtube-player';
 
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
+import { VoiceService } from '../services/voice.service';
 
 const UNSTARTED = -1;
 const ENDED = 0;
@@ -20,7 +21,11 @@ export class PlayerComponent {
     player: any;
     currentSong: Song;
 
-    constructor(private karaoke: KaraokeService, private router: Router) {}
+    constructor(
+      private karaoke: KaraokeService,
+      private router: Router,
+      private voice: VoiceService,
+    ) {}
 
     ngOnInit() {
       this.player = YouTubePlayer('player');
@@ -45,7 +50,7 @@ export class PlayerComponent {
 
     private playSong(song: Song) {
       this.currentSong = song;
-      this.player.loadVideoById(song.id);
+      this.player.loadVideoById(song.videoId);
       this.player.playVideo();
     }
 }

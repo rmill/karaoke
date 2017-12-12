@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { IdleComponent } from './idle/idle.component';
 import { PlayerComponent } from './player/player.component';
+import { VoiceService } from './services/voice.service';
 import { KaraokeService } from '../../lib/karaoke.service';
 
 const appRoutes: Routes = [
@@ -25,7 +26,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ KaraokeService ],
+  providers: [ KaraokeService, VoiceService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

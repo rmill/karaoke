@@ -26,10 +26,11 @@ function deleteSong(userId, songQueue) {
 
 function getSong(data) {
   return {
+    id: 'add-id-here',
     name: data.name,
-    id: data.id,
-    userId: data.userId,
-    userName: data.userName
+    thumbnail: data.thumbnail,
+    user: data.user,
+    videoId: data.videoId,
   };
 }
 

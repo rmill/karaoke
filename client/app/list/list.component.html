@@ -1,5 +1,13 @@
-<div *ngFor="let song of songs">
-  <span>{{song.name}}</span>
+<div class="content">
+  <div *ngFor="let song of songs" class="song">
+    <img src="{{song.thumbnail}}">
+    <div class="song-content">
+      <span>{{song.name}}</span>
+      <span>{{song.user}}</span>
+    </div>
+  </div>
+  <div *ngIf="songs.length === 0">There are no songs!</div>
 </div>
-<div *ngIf="songs.length === 0">There are no songs!</div>
-<button [routerLink]="['/search']">I want to sing!</button>
+<div class="footer">
+  <button [routerLink]="['/search']">I WANNA SING!</button>
+</div>

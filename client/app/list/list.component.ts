@@ -14,6 +14,6 @@ export class ListComponent {
   constructor(private karaoke: KaraokeService) {}
 
   ngOnInit() {
-    this.karaoke.songQueue.subscribe((queue: Array<Song>) => this.songs = queue);
+    this.karaoke.songQueue.subscribe((queue: Array<Song>) => {console.log(queue);this.songs = queue;});
   }
 }

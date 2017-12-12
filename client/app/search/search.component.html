@@ -1,8 +1,14 @@
-<input #searchBox (keyup)="search(searchBox.value)">
-<div *ngFor="let song of songs">
-  <img (click)="queueSong(song)" src="{{song.thumbnail}}">
-  <span>{{song.name}}</span>
+<div class="search">
+  <input #searchBox (keyup)="search(searchBox.value)">
+  <div class="search-content">
+    <div *ngFor="let song of songs">
+      <img (click)="queueSong(song)" src="{{song.thumbnail}}">
+      <span>{{song.name}}</span>
+    </div>
+    <div *ngIf="hasNoSongs()">There are no songs!</div>
+    <div *ngIf="hasNoSearch()">You should enter a search!</div>
+  </div>
 </div>
-<div *ngIf="hasNoSongs()">There are no songs!</div>
-<div *ngIf="hasNoSearch()">You should enter a search!</div>
-<button [routerLink]="['/list']">I changed my mind</button>
+<div class="footer">
+  <button [routerLink]="['/list']">I CHANGED MY MIND</button>
+</div>

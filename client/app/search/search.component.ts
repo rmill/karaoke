@@ -26,9 +26,11 @@ export class SearchComponent {
   private processSearch(results) {
     for (let result of results.items) {
       const song = {
-        id: result.id.videoId,
+        id: '',
         name: result.snippet.title,
-        thumbnail: result.snippet.thumbnails.default.url
+        thumbnail: result.snippet.thumbnails.default.url,
+        user: '',
+        videoId: result.id.videoId,
       };
 
       this.songs.push(song);
@@ -45,7 +47,7 @@ export class SearchComponent {
     this.songs = [];
 
     if (text === '') {
-      this.loading = false; 
+      this.loading = false;
       return;
     }
 
@@ -55,7 +57,7 @@ export class SearchComponent {
 
     this.karaoke.search(text).subscribe(
       (results) => this.processSearch(results),
-      () => null,
+      () => this.loading = false,
       () => this.loading = false
     );
   }

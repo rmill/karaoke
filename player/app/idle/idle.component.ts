@@ -17,7 +17,7 @@ export class IdleComponent {
 
     private onQueueChange(queue: Array<Song>) {
       if (queue.length > 0) {
-        this.router.navigateByUrl('/player');
+        this.router.navigateByUrl('/next-song');
       }
     }
 }

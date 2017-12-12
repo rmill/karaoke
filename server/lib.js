@@ -1,8 +1,10 @@
 function authenticate(req, res, next) {
-  const userId = req.headers.authorization;
+  const auth = req.headers.authorization;
 
-  if (userId) {
-    req.body.userId = userId;
+  if (auth) {
+    const user = JSON.parse(auth);
+    req.body.userId = user.token;
+    req.body.isHost = user.isHost;
     return next();
   }
 
@@ -29,7 +31,7 @@ function getSong(data) {
     id: 'add-id-here',
     name: data.name,
     thumbnail: data.thumbnail,
-    user: data.user,
+    userId: data.userId,
     videoId: data.videoId,
   };
 }

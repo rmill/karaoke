@@ -22,7 +22,7 @@ app.get('/songs', (req, res) => {
 
 app.post('/song', authenticate, (req, res) => {
   // A user may only have one song
-  if (songExists(req.body.userId, songQueue)) return res.status(409).end();
+  if (!req.body.isHost && songExists(req.body.userId, songQueue)) return res.status(409).end();
 
   // Add the song to the queue
   songQueue.push(getSong(req.body, songQueue));
@@ -31,7 +31,7 @@ app.post('/song', authenticate, (req, res) => {
 
 app.put('/song', authenticate, (req, res) => {
   // Song must exist to change
-  if (!songExists(req.body.userId, songQueue)) return res.status(404).end();
+  if (!req.body.isHost && !songExists(req.body.userId, songQueue)) return res.status(404).end();
 
   // Change the user's song
   changeSong(req.body.userId, req.body, songQueue);
@@ -40,7 +40,7 @@ app.put('/song', authenticate, (req, res) => {
 
 app.delete('/song', authenticate, (req, res) => {
   // Song must exist to delete
-  if (!songExists(req.body.userId, songQueue)) return res.status(404).end();
+  if (!req.body.isHost && !songExists(req.body.userId, songQueue)) return res.status(404).end();
 
   // Delete the song
   deleteSong(req.body.userId, songQueue);

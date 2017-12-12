@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class KaraokeService {
   readonly songQueue: Observable<Array<Song>>;
 
+  private headers: HttpHeaders;
   private queue: Array<Song> = [];
   private songQueueSubject = new BehaviorSubject<Array<Song>>([]);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private auth: AuthService) {
     this.songQueue = this.songQueueSubject.asObservable();
+    this.headers = new HttpHeaders({ Authorization: JSON.stringify(this.auth.user) });
 
     // Poll the song queue and emit when it changes
-    Observable.interval(5000)
+    Observable.interval(3000)
               .flatMap(() => this.getSongQueue())
               .subscribe((queue) => this.processSongQueue(queue));
   }
@@ -29,14 +33,14 @@ export class KaraokeService {
    * Go to the next song
    */
   public next() {
-    this.http.post('http://localhost:3000/next', null).subscribe(() => null);
+    this.http.post('http://localhost:3000/next', null, { headers: this.headers }).subscribe(() => null);
   }
 
   /**
    * Add a song to the queue
    */
   public queueSong(song: Song) {
-    return this.http.post('http://localhost:3000/song', song);
+    return this.http.post('http://localhost:3000/song', song, { headers: this.headers });
   }
 
   /**

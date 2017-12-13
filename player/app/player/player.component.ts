@@ -1,25 +1,26 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import YouTubePlayer from 'youtube-player';
 
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
 import { VoiceService } from '../services/voice.service';
 
-const UNSTARTED = -1;
-const ENDED = 0;
-const PLAYING = 1;
-const PAUSED = 2;
-const BUFFERING = 3;
-const VIDEO_QUEUED = 5;
+const NEXT_SONG_TRIGGER = 30;
 
 @Component({
   selector: 'karaoke-player',
-  template: '<div id="player"></div>',
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.css'],
+  templateUrl: 'player.component.html',
 })
 export class PlayerComponent {
-    player: any;
     currentSong: Song;
+    nextSong: Song;
+    player: YouTubePlayer;
+    queueSub: Subscription;
+    timerSub: Subscription;
+    timeRemaining: number = Infinity;
+    target: any;
 
     constructor(
       private karaoke: KaraokeService,
@@ -28,12 +29,21 @@ export class PlayerComponent {
     ) {}
 
     ngOnInit() {
-      this.player = YouTubePlayer('player');
-      this.player.on('stateChange', (event) => {
-        if (event.data === ENDED) this.karaoke.next();
-      });
-      this.player.on('error', () => this.karaoke.next());
-      this.karaoke.songQueue.subscribe((queue) => this.onQueueChange(queue));
+      const options = { controls: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, rel: 0, showinfo: 0 };
+      this.player = YouTubePlayer('player', { playerVars: options });
+      this.player.on('stateChange', (event) => this.target = event.target);
+      this.player.on('error', (err) => this.onError(err));
+      this.queueSub = this.karaoke.songQueue.subscribe((queue) => this.onQueueChange(queue));
+      this.timerSub = Observable.interval(1000).subscribe(() => this.processTime());
+    }
+
+    ngOnDestroy() {
+      this.queueSub.unsubscribe();
+      if (this.timerSub) this.timerSub.unsubscribe();
+    }
+
+    private onError(err) {
+      this.karaoke.next();
     }
 
     private onQueueChange(queue: Array<Song>) {
@@ -42,9 +52,15 @@ export class PlayerComponent {
         return;
       }
 
-      if (!this.currentSong || queue[0].id !== this.currentSong.id) {
-        // Change the song
+      this.nextSong = queue.length >= 2 ? queue[1] : null;
+
+      if (!this.currentSong) {
         this.playSong(queue[0]);
+        return;
+      }
+
+      if (this.currentSong.id !== queue[0].id) {
+        this.router.navigateByUrl('/next-song');
       }
     }
 
@@ -52,5 +68,16 @@ export class PlayerComponent {
       this.currentSong = song;
       this.player.loadVideoById(song.videoId);
       this.player.playVideo();
+    }
+
+    private processTime() {
+      if (this.target && this.target.getDuration() > 0) {
+        this.timeRemaining = this.target.getDuration() - this.target.getCurrentTime();
+        if (this.timeRemaining <= 3) this.karaoke.next();
+      }
+    }
+
+    private showNextSong() {
+      return this.timeRemaining <= NEXT_SONG_TRIGGER && this.nextSong;
     }
 }

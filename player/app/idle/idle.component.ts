@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
 
@@ -9,10 +10,16 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
   styleUrls: ['./idle.component.css']
 })
 export class IdleComponent {
+    private queueSub: Subscription;
+
     constructor(private karaoke: KaraokeService, private router: Router) {}
 
     ngOnInit() {
-      this.karaoke.songQueue.subscribe((queue) => this.onQueueChange(queue));
+      this.queueSub = this.karaoke.songQueue.subscribe((queue) => this.onQueueChange(queue));
+    }
+
+    ngOnDestroy() {
+      this.queueSub.unsubscribe();
     }
 
     private onQueueChange(queue: Array<Song>) {

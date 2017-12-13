@@ -4,22 +4,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
 
+const POLL_INTERVAL = 3000;
+
 @Injectable()
 export class KaraokeService {
   readonly songQueue: Observable<Array<Song>>;
 
   private headers: HttpHeaders;
   private queue: Array<Song> = [];
-  private songQueueSubject = new BehaviorSubject<Array<Song>>([]);
+  public songQueueSubject = new BehaviorSubject<Array<Song>>([]);
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.songQueue = this.songQueueSubject.asObservable();
     this.headers = new HttpHeaders({ Authorization: JSON.stringify(this.auth.user) });
 
     // Poll the song queue and emit when it changes
-    Observable.interval(3000)
-              .flatMap(() => this.getSongQueue())
-              .subscribe((queue) => this.processSongQueue(queue));
+    setInterval(() => this.poll(), POLL_INTERVAL);
   }
 
   /**
@@ -52,6 +52,13 @@ export class KaraokeService {
   }
 
   /**
+   * Poll the song queue
+   */
+  private poll() {
+    this.getSongQueue().subscribe((queue) => this.processSongQueue(queue));
+  }
+
+  /**
    * Only emit new queues
    */
   private processSongQueue(queue: Array<Song>) {
@@ -66,6 +73,6 @@ export interface Song {
   id: string;
   name: string;
   thumbnail: string;
-  user: string;
+  userName: string;
   videoId: string;
 }

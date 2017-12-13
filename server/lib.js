@@ -1,3 +1,5 @@
+const randomString = require('random-string');
+
 function authenticate(req, res, next) {
   const auth = req.headers.authorization;
 
@@ -28,10 +30,11 @@ function deleteSong(userId, songQueue) {
 
 function getSong(data) {
   return {
-    id: 'add-id-here',
+    id: randomString(),
     name: data.name,
     thumbnail: data.thumbnail,
     userId: data.userId,
+    userName: data.userName,
     videoId: data.videoId,
   };
 }

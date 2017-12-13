@@ -13,7 +13,7 @@ const songQueue = [];
 
 app.post('/next', (req, res) => {
   songQueue.shift();
-  res.end();
+  res.end(JSON.stringify(songQueue));
 });
 
 app.get('/songs', (req, res) => {
@@ -35,7 +35,7 @@ app.put('/song', authenticate, (req, res) => {
 
   // Change the user's song
   changeSong(req.body.userId, req.body, songQueue);
-  res.end();
+  res.end(JSON.stringify(songQueue));
 });
 
 app.delete('/song', authenticate, (req, res) => {
@@ -44,7 +44,7 @@ app.delete('/song', authenticate, (req, res) => {
 
   // Delete the song
   deleteSong(req.body.userId, songQueue);
-  res.end();
+  res.end(JSON.stringify(songQueue));
 });
 
 app.listen(3000, () => {

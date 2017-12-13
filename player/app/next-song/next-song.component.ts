@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
+import { VoiceService } from '../services/voice.service';
 
-const WAIT_TIME = 30;
+const WAIT_TIME = 5;
 
 @Component({
   selector: 'karaoke-next-song',
@@ -12,26 +13,25 @@ const WAIT_TIME = 30;
   templateUrl: 'next-song.component.html',
 })
 export class NextSongComponent {
+  private queueSub: Subscription;
   private song: Song;
-  private time: number = 0;
-  private timer: Subscription;
+  private time: number;
+  private timeSub: Subscription;
 
-  constructor(private karaoke: KaraokeService, private router: Router) {}
+  constructor(
+    private karaoke: KaraokeService,
+    private router: Router,
+    private voice: VoiceService,
+  ) {}
 
   ngOnInit() {
     this.time = WAIT_TIME;
-    this.karaoke.songQueue.subscribe((queue: Array<Song>) => {
-      if (queue.length > 0) {
-        this.song = queue[0];
-        this.timer = Observable.interval(1000).subscribe(() => this.decreaseTime());
-      } else {
-        this.router.navigateByUrl('/idle');
-      }
-    });
+    this.queueSub = this.karaoke.songQueue.subscribe((queue: Array<Song>) => this.processQueue(queue));
   }
 
   ngOnDestroy() {
-    if (this.timer) this.timer.unsubscribe();
+    this.queueSub.unsubscribe();
+    if (this.timeSub) this.timeSub.unsubscribe();
   }
 
   private decreaseTime() {
@@ -39,6 +39,23 @@ export class NextSongComponent {
 
     if (this.time < 0) {
       this.router.navigateByUrl('/player');
+    }
+  }
+
+  private processQueue(queue: Array<Song>) {
+    if (queue.length > 0) {
+      if (!this.song) {
+        // Show the song we are waiting for
+        this.song = queue[0];
+        this.timeSub = Observable.interval(1000).subscribe(() => this.decreaseTime());
+        // this.voice.speak(`Coming up next. ${this.song.userName} is singing ${this.song.name}`);
+      } else if(this.song.id !== queue[0].id) {
+        // The song has been cancelled, reload the component
+        this.router.navigateByUrl('/next-song');
+      }
+    } else {
+      // No songs left, go to the idle screen
+      this.router.navigateByUrl('/idle');
     }
   }
 }

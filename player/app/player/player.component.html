@@ -1,6 +1,9 @@
 <div id="player"></div>
-<div *ngIf="showNextSong()">
-  UP NEXT!
-  <div>{{nextSong.name}}</div>
-  <div>{{nextSong.userName}}</div>
+<div *ngIf="showNextSong()" class="pop-up-small">
+  <img src="../../assets/pop_up_small.png">
+  <div class="player-text">
+    <div>UP NEXT!</div>
+    <div class="name">{{nextSong.name}}</div>
+    <div class="user">{{nextSong.userName}}</div>
+  </div>
 </div>

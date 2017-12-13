@@ -1,0 +1,57 @@
+:host {
+  background-image: url('../../assets/background.jpg');
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.pop-up {
+  left: 46.5vh;
+  position: absolute;
+  top: 10vh;
+  height: 62vh;
+  width: 67vw;
+  z-index: 2;
+}
+
+.pop-up img {
+  height: 100%;
+  width: 100%;
+}
+
+.idle-text {
+  font-family: "Liberator-Heavy";
+  font-size: 9vh;
+  position: absolute;
+  left: 23%;
+  top: 13%;
+  width: 73%;
+  z-index: 3;
+}
+
+.idle-text div {
+  margin: 8px 0px;
+}
+
+.idle-text .name {
+  color: #b70615;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.idle-text .user {
+  font-size: 6vh;
+  margin: 16px 0px;
+  font-family: "Liberator-Medium";
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.face {
+  height: 105vh;
+  position: absolute;
+  top: -17px;
+  z-index: 1;
+}

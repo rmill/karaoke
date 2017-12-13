@@ -1,3 +1,30 @@
+@font-face {
+  font-family: "Liberator-Heavy";
+  src: url("../lib/Liberator-Heavy.ttf");
+}
+
+@font-face {
+  font-family: "Liberator-Medium";
+  src: url("../lib/Liberator-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Liberator-Light";
+  src: url("../lib/Liberator-Light.ttf");
+}
+
+.heavy {
+  font-family: "Liberator-Heavy";
+}
+
+.medium  {
+  font-family: "Liberator-Medium";
+}
+
+.light {
+  font-family: "Liberator-Light";
+}
+
 html, body {
   height: 100%;
   width: 100%;

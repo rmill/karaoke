@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
 import { VoiceService } from '../services/voice.service';
 
-const WAIT_TIME = 5;
+const WAIT_TIME = 30;
 
 @Component({
   selector: 'karaoke-next-song',
@@ -48,7 +48,7 @@ export class NextSongComponent {
         // Show the song we are waiting for
         this.song = queue[0];
         this.timeSub = Observable.interval(1000).subscribe(() => this.decreaseTime());
-        // this.voice.speak(`Coming up next. ${this.song.userName} is singing ${this.song.name}`);
+        this.voice.speak(`Coming up next. ${this.song.userName} is singing ${this.song.name}`);
       } else if(this.song.id !== queue[0].id) {
         // The song has been cancelled, reload the component
         this.router.navigateByUrl('/next-song');

@@ -6,8 +6,8 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
 
 @Component({
   selector: 'karaoke-idle',
-  template: 'WAITING',
-  styleUrls: ['./idle.component.css']
+  styleUrls: ['./idle.component.css'],
+  templateUrl: 'idle.component.html',
 })
 export class IdleComponent {
     private queueSub: Subscription;

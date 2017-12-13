@@ -1,0 +1,38 @@
+.pop-up-small {
+  position: absolute;
+  bottom: 0px;
+  height: 23vh;
+  left: 2vw;
+  width: 35vw;
+}
+
+.player-text {
+  font-family: "Liberator-Heavy";
+  position: absolute;
+  left: 8vw;
+  right: 2vw;
+  font-size: 3vh;
+  bottom: 10.5vh;
+}
+
+.pop-up-small img {
+  height: 100%;
+  width: 100%;
+}
+
+.name {
+  margin-top: .5vh;
+  color: #b70615;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user {
+  margin-top: 1.5vh;
+  font-family: "Liberator-Medium";
+  font-size: 2.2vh;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

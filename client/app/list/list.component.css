@@ -5,7 +5,7 @@
 hr {
   width: 47vw;
   border: 0;
-  height: 0.1px;
+  height: 1px;
   background-color: white;
 }
 
@@ -29,8 +29,10 @@ hr {
 }
 
 .no-songs {
+  vertical-align: middle;
   font-size: 6vh;
   height: 30vh;
+  display: table-cell;
 }
 
 .one-song {
@@ -39,4 +41,13 @@ hr {
 
 .song {
   margin: 4vh 0;
+}
+
+.footer {
+  color: white;
+  font-size: 11vw;
+}
+
+.youre-up {
+  margin-top: 11vh;
 }

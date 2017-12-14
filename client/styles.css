@@ -37,8 +37,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .button:active {
-  -webkit-filter: invert();
-  filter: invert();
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
 }
 
 .red {

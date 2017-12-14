@@ -1,14 +1,18 @@
-<div class="search">
-  <input #searchBox (keyup)="search(searchBox.value)">
-  <div class="search-content">
-    <div *ngFor="let song of songs">
-      <img (click)="queueSong(song)" src="{{song.thumbnail}}">
-      <span>{{song.name}}</span>
+<div class="header">
+  <img class="header-img" src="../../assets/search-header.png">
+  <div class="header-content">
+    <a routerLink="/list">GO BACK</a>
+    <div class="search">
+      <h2 class="red">FIND A SONG</h2>
+      <input #searchInput placeholder="Search song" (keyup)="search(searchInput.value)">
     </div>
-    <div *ngIf="hasNoSongs()">There are no songs!</div>
-    <div *ngIf="hasNoSearch()">You should enter a search!</div>
   </div>
 </div>
-<div class="footer">
-  <button [routerLink]="['/list']">I CHANGED MY MIND</button>
+<div>
+  <div *ngFor="let song of songs" (click)="queueSong(song)" class="song">
+    <img src="{{song.thumbnail}}">
+    <div class="song-content">
+      <h5>{{song.name}}</h5>
+    </div>
+  </div>
 </div>

@@ -5,31 +5,25 @@
     <h1 class="red">RAT KING KARAOKE</h1>
   </div>
 </div>
-<div *ngIf="songs">
+<div *ngIf="isInit">
   <div class="content">
     <div class="no-songs" *ngIf="songs.length === 0">OMG nobody is singing!</div>
-    <div class="one-song" *ngIf="songs.length === 1">
+    <div *ngIf="songs.length > 0" [class.one-song]="songs.length === 1">
       <div class="song">
         <h2>NOW PLAYING</h2>
-        <h2>Bon Jovi - Dead or Alive</h2>
-        <h4 class="light">Mr. Poopy Butthole</h4>
+        <h2>{{songs[0].name}}</h2>
+        <h4 class="light">{{songs[0].userName}}</h4>
       </div>
-    </div>
-    <div *ngIf="songs.length > 1">
-      <div class="song">
-        <h2>NOW PLAYING</h2>
-        <h2>Bon Jovi - Dead or Alive</h2>
-        <h4 class="light">Mr. Poopy Butthole</h4>
-      </div>
-      <hr>
-      <div class="song">
+      <hr *ngIf="songs.length > 1">
+      <div *ngIf="songs.length > 1" class="song">
         <h2>UP NEXT!</h2>
-        <h2>Bon Jovi - Dead or Alive</h2>
-        <h4 class="light">Mr. Poopy Butthole</h4>
+        <h2>{{songs[1].name}}</h2>
+        <h4 class="light">{{songs[1].userName}}</h4>
       </div>
     </div>
   </div>
   <div class="footer">
-    <img class="button" src="../../assets/request.png">
+    <img *ngIf="!yourSong" class="button" routerLink="/search" src="../../assets/request.png">
+    <div *ngIf="yourSong" class="youre-up">You're up in about 10 mins</div>
   </div>
 </div>

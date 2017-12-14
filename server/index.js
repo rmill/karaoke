@@ -26,7 +26,7 @@ app.post('/song', authenticate, (req, res) => {
 
   // Add the song to the queue
   songQueue.push(getSong(req.body, songQueue));
-  res.end();
+  res.end(JSON.stringify(songQueue));
 });
 
 app.put('/song', authenticate, (req, res) => {

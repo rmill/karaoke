@@ -1,8 +1,79 @@
-.search {
-  padding: 36px;
+:host {
+  background: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 input {
   width: 100%;
-  height: 16vh; 
+  padding: 5px;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.search {
+  text-align: center;
+}
+
+.song {
+  background-color: #cbcccb;
+  font-size: 6vw;
+  width: 80%;
+  height: 12vh;
+  margin: 2vh auto;
+}
+
+.song:active {
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
+}
+
+.song img {
+  border: 1px;
+  width: 33%;
+  height: 12vh;
+  float: left;
+}
+
+.song-content {
+  overflow-y: hidden;
+  margin-left: 33%;
+  height: 12vh;
+  padding: 0 4vw;
+  display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+}
+
+.song-content h5 {
+  margin: 2px 0;
+  white-space: normal;
+}
+
+.header-img {
+  width: 100%;
+}
+
+.search {
+  padding: 36px;
+}
+
+.header-content {
+  position: absolute;
+  top: 0;
+  padding: 5vh 10vw;
+  width: 80vw;
 }

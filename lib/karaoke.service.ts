@@ -12,7 +12,7 @@ export class KaraokeService {
 
   private headers: HttpHeaders;
   private queue: Array<Song> = [];
-  public songQueueSubject = new BehaviorSubject<Array<Song>>(null);
+  public songQueueSubject = new BehaviorSubject<Array<Song>>([]);
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.songQueue = this.songQueueSubject.asObservable();
@@ -66,6 +66,7 @@ export class KaraokeService {
     if (JSON.stringify(this.queue) !== JSON.stringify(queue)) {
       this.queue = queue;
       this.songQueueSubject.next(queue);
+      console.log(queue);
     }
   }
 }
@@ -74,6 +75,7 @@ export interface Song {
   id?: string;
   name: string;
   thumbnail: string;
+  userId?: string;
   userName: string;
   videoId: string;
 }

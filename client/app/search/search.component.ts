@@ -10,7 +10,7 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
 })
 export class SearchComponent {
   loading: boolean = false;
-  songs: Array<Song> = [];
+  songs: Array<Result> = [];
   searchText: string = '';
 
   constructor(private karaoke: KaraokeService, private router: Router) {}
@@ -25,10 +25,10 @@ export class SearchComponent {
 
   private processSearch(results) {
     for (let result of results.items) {
-      const song = {
+      const song: Song = {
         name: result.snippet.title,
         thumbnail: result.snippet.thumbnails.default.url,
-        userName: 'Test Name',
+        userName: 'Test User',
         videoId: result.id.videoId,
       };
 
@@ -36,7 +36,7 @@ export class SearchComponent {
     }
   }
 
-  private queueSong(song) {
+  private queueSong(song: Song) {
     this.karaoke.queueSong(song).subscribe(() => this.router.navigateByUrl('/list'));
   }
 
@@ -60,4 +60,10 @@ export class SearchComponent {
       () => this.loading = false
     );
   }
+}
+
+interface Result {
+  name: string;
+  thumbnail: string;
+  videoId: string;
 }

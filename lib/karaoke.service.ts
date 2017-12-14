@@ -12,7 +12,7 @@ export class KaraokeService {
 
   private headers: HttpHeaders;
   private queue: Array<Song> = [];
-  public songQueueSubject = new BehaviorSubject<Array<Song>>([]);
+  public songQueueSubject = new BehaviorSubject<Array<Song>>(null);
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.songQueue = this.songQueueSubject.asObservable();
@@ -20,6 +20,7 @@ export class KaraokeService {
 
     // Poll the song queue and emit when it changes
     setInterval(() => this.poll(), POLL_INTERVAL);
+    this.poll();
   }
 
   /**
@@ -70,7 +71,7 @@ export class KaraokeService {
 }
 
 export interface Song {
-  id: string;
+  id?: string;
   name: string;
   thumbnail: string;
   userName: string;

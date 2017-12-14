@@ -9,11 +9,11 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent {
-  songs: Array<Song> = [];
+  songs: Array<Song>;
 
   constructor(private karaoke: KaraokeService) {}
 
   ngOnInit() {
-    this.karaoke.songQueue.subscribe((queue: Array<Song>) => {console.log(queue);this.songs = queue;});
+    this.karaoke.songQueue.subscribe((queue: Array<Song>) => this.songs = queue);
   }
 }

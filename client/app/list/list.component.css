@@ -1,54 +1,42 @@
-.content {
-  align-items: center;
-  flex-direction: column;
-  font-size: 9vh;
-  height: 81vh;
-  justify-content: center;
-  overflow-y: scroll;
+:host {
+  text-align: center;
 }
 
-.footer {
-  align-items: center;
-  background: #f08;
-  bottom: 0;
-  display: flex;
-  height: 18vh;
-  justify-content: center;
-  position: absolute;
+hr {
+  width: 47vw;
+  border: 0;
+  height: 0.1px;
+  background-color: white;
+}
+
+.header {
   width: 100%;
 }
 
-.footer button {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border: 1.5px solid white;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
+.header img {
+  width: 100%;
 }
 
-.footer button:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
+.header-content {
+  position: absolute;
+  top: 4vh;
+  width: 100%;
+}
+
+.content {
+  color: white;
+  margin: 6vh 8vh
+}
+
+.no-songs {
+  font-size: 6vh;
+  height: 30vh;
+}
+
+.one-song {
+  height: 30vh;
 }
 
 .song {
-  background: #6be;
-  font-size: 1vw;
-  margin: 25px;
-  padding: 13px;
+  margin: 4vh 0;
 }

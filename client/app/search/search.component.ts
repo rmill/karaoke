@@ -26,10 +26,9 @@ export class SearchComponent {
   private processSearch(results) {
     for (let result of results.items) {
       const song = {
-        id: '',
         name: result.snippet.title,
         thumbnail: result.snippet.thumbnails.default.url,
-        user: '',
+        userName: 'Test Name',
         videoId: result.id.videoId,
       };
 

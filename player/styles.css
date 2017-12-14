@@ -13,18 +13,6 @@
   src: url("../lib/Liberator-Light.ttf");
 }
 
-.heavy {
-  font-family: "Liberator-Heavy";
-}
-
-.medium  {
-  font-family: "Liberator-Medium";
-}
-
-.light {
-  font-family: "Liberator-Light";
-}
-
 html, body {
   height: 100%;
   width: 100%;

@@ -1,13 +1,35 @@
-<div class="content">
-  <div *ngFor="let song of songs" class="song">
-    <img src="{{song.thumbnail}}">
-    <div class="song-content">
-      <span>{{song.name}}</span>
-      <span>{{song.user}}</span>
+<div class="header">
+  <img src="../../assets/header.png">
+  <div class="header-content">
+    <h2>WELCOME TO</h2>
+    <h1 class="red">RAT KING KARAOKE</h1>
+  </div>
+</div>
+<div *ngIf="songs">
+  <div class="content">
+    <div class="no-songs" *ngIf="songs.length === 0">OMG nobody is singing!</div>
+    <div class="one-song" *ngIf="songs.length === 1">
+      <div class="song">
+        <h2>NOW PLAYING</h2>
+        <h2>Bon Jovi - Dead or Alive</h2>
+        <h4 class="light">Mr. Poopy Butthole</h4>
+      </div>
+    </div>
+    <div *ngIf="songs.length > 1">
+      <div class="song">
+        <h2>NOW PLAYING</h2>
+        <h2>Bon Jovi - Dead or Alive</h2>
+        <h4 class="light">Mr. Poopy Butthole</h4>
+      </div>
+      <hr>
+      <div class="song">
+        <h2>UP NEXT!</h2>
+        <h2>Bon Jovi - Dead or Alive</h2>
+        <h4 class="light">Mr. Poopy Butthole</h4>
+      </div>
     </div>
   </div>
-  <div *ngIf="songs.length === 0">There are no songs!</div>
-</div>
-<div class="footer">
-  <button [routerLink]="['/search']">I WANNA SING!</button>
+  <div class="footer">
+    <img class="button" src="../../assets/request.png">
+  </div>
 </div>

@@ -1,6 +1,50 @@
+@font-face {
+  font-family: "Liberator-Heavy";
+  src: url("../lib/Liberator-Heavy.ttf");
+}
+
+@font-face {
+  font-family: "Liberator-Medium";
+  src: url("../lib/Liberator-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Liberator-Light";
+  src: url("../lib/Liberator-Light.ttf");
+}
+
 html, body {
-  background: linear-gradient(#262a59, #1b1133);
-  color: white;
+  background: url('./assets/background.jpg') no-repeat center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: "Liberator-Heavy";
   height: 100%;
+  width: 100%;
   margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 10px 0px;
+}
+
+.button {
+  width: 58vw;
+}
+
+.button:active {
+  -webkit-filter: invert();
+  filter: invert();
+}
+
+.red {
+  color: #b70615;
+}
+
+.light {
+  font-family: "Liberator-Light";
 }

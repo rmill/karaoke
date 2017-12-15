@@ -20,6 +20,11 @@ export class ListComponent {
     this.karaoke.songQueue.subscribe((queue: Array<Song>) => this.processQueue(queue));
   }
 
+  private hasSong(): boolean {
+    if (this.auth.user.isHost) return false;
+    return Boolean(this.yourSong);
+  }
+
   private processQueue(queue: Array<Song>) {
     let yourSong = null;
     for (let song of queue) {

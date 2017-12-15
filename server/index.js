@@ -9,7 +9,12 @@ const app = express()
 app.use(cors());
 app.use(bodyParser.json());
 
+const appDir = path.dirname(require.main.filename);
 const songQueue = [];
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(appDir, 'index.html'));
+});
 
 app.post('/next', (req, res) => {
   songQueue.shift();

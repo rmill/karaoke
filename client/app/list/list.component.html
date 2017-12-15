@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="footer">
-    <img *ngIf="!yourSong" class="button" routerLink="/search" src="../../assets/request.png">
-    <div *ngIf="yourSong" class="youre-up">You're up in about 10 mins</div>
+    <img *ngIf="!hasSong()" class="button" routerLink="/search" src="../../assets/request.png">
+    <div *ngIf="hasSong()" class="youre-up">You're up in about 10 mins</div>
   </div>
 </div>

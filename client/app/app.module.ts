@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { SearchComponent } from './search/search.component';
 import { AuthService } from '../../lib/auth.service';
+import { EnvService } from '../../lib/env.service';
 import { KaraokeService } from '../../lib/karaoke.service';
 
 const appRoutes: Routes = [
@@ -26,7 +27,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ AuthService, KaraokeService ],
+  providers: [
+    AuthService,
+    EnvService,
+    KaraokeService,
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

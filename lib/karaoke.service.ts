@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AuthService } from './auth.service';
+import { EnvService } from './env.service';
 
 const POLL_INTERVAL = 3000;
 
@@ -14,7 +15,7 @@ export class KaraokeService {
   private queue: Array<Song> = [];
   public songQueueSubject = new BehaviorSubject<Array<Song>>([]);
 
-  constructor(private http: HttpClient, private auth: AuthService) {
+  constructor(private auth: AuthService, private env: EnvService, private http: HttpClient) {
     this.songQueue = this.songQueueSubject.asObservable();
     this.headers = new HttpHeaders({ Authorization: JSON.stringify(this.auth.user) });
 
@@ -27,7 +28,7 @@ export class KaraokeService {
    * Get the song queue
    */
   public getSongQueue(): Observable<Array<Song>> {
-    return this.http.get('http://localhost:3000/songs');
+    return this.http.get(`${this.env.get('apiUrl')}/songs`);
   }
 
   /**

@@ -9,23 +9,11 @@ const app = express()
 
 const appDir = path.dirname(require.main.filename);
 const songQueue = [];
-const port = process.argv[2] || 3001;
+const port = process.argv[2] || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/', express.static(path.join(appDir, '../dist-client')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(appDir, '../dist-client/index.html'));
-});
-
-app.get('/list', (req, res) => {
-  res.sendFile(path.join(appDir, '../dist-client/index.html'));
-});
-
-app.get('/search', (req, res) => {
-  res.sendFile(path.join(appDir, '../dist-client/index.html'));
-});
 
 app.post('/next', (req, res) => {
   songQueue.shift();
@@ -61,6 +49,10 @@ app.delete('/song', authenticate, (req, res) => {
   // Delete the song
   deleteSong(req.body.userId, songQueue);
   res.end(JSON.stringify(songQueue));
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(appDir, '../dist-client/index.html'));
 });
 
 app.listen(port, () => {

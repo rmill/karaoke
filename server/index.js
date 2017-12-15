@@ -4,16 +4,27 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express')
 const {authenticate, changeSong, deleteSong, songExists, getSong} = require('./lib');
+const path = require('path');
 const app = express()
-
-app.use(cors());
-app.use(bodyParser.json());
 
 const appDir = path.dirname(require.main.filename);
 const songQueue = [];
+const port = process.argv[2] || 3001;
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use('/', express.static(path.join(appDir, '../dist-client')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(appDir, 'index.html'));
+  res.sendFile(path.join(appDir, '../dist-client/index.html'));
+});
+
+app.get('/list', (req, res) => {
+  res.sendFile(path.join(appDir, '../dist-client/index.html'));
+});
+
+app.get('/search', (req, res) => {
+  res.sendFile(path.join(appDir, '../dist-client/index.html'));
 });
 
 app.post('/next', (req, res) => {
@@ -52,6 +63,6 @@ app.delete('/song', authenticate, (req, res) => {
   res.end(JSON.stringify(songQueue));
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 })

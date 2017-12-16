@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../../../lib/auth.service';
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
 
 @Component({
@@ -14,7 +15,11 @@ export class SearchComponent {
   selectedSong: Song;
   searchText: string = '';
 
-  constructor(private karaoke: KaraokeService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private karaoke: KaraokeService,
+    private router: Router
+  ) {}
 
   private hasName(name: string) {
     return name && name.trim();
@@ -33,6 +38,7 @@ export class SearchComponent {
   }
 
   private onOK(name: string) {
+    this.auth.setName(name);
     this.selectedSong['userName'] = name;
     this.karaoke.queueSong(this.selectedSong).subscribe(() => this.router.navigateByUrl('/list'));
   }

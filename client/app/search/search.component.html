@@ -18,7 +18,7 @@
 </div>
 <div *ngIf="selectedSong" class="name">
   <h1>ENTER YOUR NAME</h1>
-  <input #name>
+  <input #name [value]="auth.name">
   <div class="controls">
     <h4 class="cancel" (click)="onCancel()">CANCEL</h4>
     <h4 *ngIf="hasName(name.value)" class="ok" (click)="onOK(name.value)">OK</h4>

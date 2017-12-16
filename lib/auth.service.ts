@@ -5,6 +5,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Injectable()
 export class AuthService {
   public user: User;
+  public name: string = '';
 
   constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -17,6 +18,10 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(this.user));
       }
     });
+  }
+
+  setName(name: string) {
+    if (!this.user.isHost) this.name = name;
   }
 }
 

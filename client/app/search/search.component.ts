@@ -61,7 +61,7 @@ export class SearchComponent {
       const song: Song = {
         name: result.snippet.title,
         thumbnail: result.snippet.thumbnails.default.url,
-        userName: 'Test User',
+        userName: '',
         videoId: result.id.videoId,
       };
 

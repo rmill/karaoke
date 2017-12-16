@@ -24,7 +24,7 @@
   </div>
   <div class="footer">
     <img *ngIf="!hasSong()" class="button" routerLink="/search" src="../../assets/request.png">
-    <div *ngIf="hasSong()" class="youre-up">You're up in about 10 mins</div>
+    <div *ngIf="hasSong()" class="youre-up">{{ hasSongText() }}</div>
   </div>
   <div *ngIf="showSkip()" (click)="skip()" class="skip">SKIP CURRENT SONG</div>
 </div>

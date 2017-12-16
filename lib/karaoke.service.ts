@@ -35,14 +35,14 @@ export class KaraokeService {
    * Go to the next song
    */
   public next() {
-    return this.http.post(`${this.env.get('apiUrl')}/next`, null, { headers: this.headers }).subscribe(() => null);
+    return this.http.post(`${this.env.get('apiUrl')}/next`, null, { headers: this.headers }).subscribe((queue: Array<Song>) => this.processSongQueue(queue));
   }
 
   /**
    * Add a song to the queue
    */
   public queueSong(song: Song) {
-    return this.http.post(`${this.env.get('apiUrl')}/song`, song, { headers: this.headers });
+    return this.http.post(`${this.env.get('apiUrl')}/song`, song, { headers: this.headers }).map((queue) => this.processSongQueue(<Array<Song>>queue));
   }
 
   /**

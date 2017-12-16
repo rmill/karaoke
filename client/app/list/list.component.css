@@ -54,6 +54,7 @@ hr {
 }
 
 .skip {
+  font-size: 2vh;
   margin-top: 3vh;
   text-decoration: underline;
 }

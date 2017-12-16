@@ -44,7 +44,7 @@ export class ListComponent {
       case 1: return 'YOU\'RE UP NEXT!';
       case 2:
       case 3: return 'HEAD DOWNSTAIRS. YOU\'RE UP SOON';
-      default: return `YOU'RE UP IN ABOUT ${songsBeforeYou * 4} MINUTES`
+      default: return `YOU'RE UP IN ABOUT ${songsBeforeYou * 3} MINUTES`
     }
   }
 

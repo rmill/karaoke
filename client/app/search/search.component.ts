@@ -12,6 +12,8 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
 })
 export class SearchComponent {
   loading: boolean = false;
+  queue: Array<Song> = [];
+  queueSub: Subscription;
   searchText: string = '';
   searchSub: Subscription;
   selectedSong: Song;
@@ -32,6 +34,18 @@ export class SearchComponent {
         () => this.loading = false
       );
     });
+  }
+
+  ngOnInit() {
+    this.queueSub = this.karaoke.songQueue.subscribe((queue: Array<Song>) => this.queue = queue);
+  }
+
+  ngOnDestroy() {
+    this.queueSub.unsubscribe();
+  }
+
+  private getWaitTime(): string {
+    return `${this.queue.length * 3} Minutes`;
   }
 
   private hasName(name: string) {

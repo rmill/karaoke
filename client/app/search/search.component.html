@@ -5,6 +5,7 @@
     <div class="search">
       <h2 class="red">FIND A SONG</h2>
       <input #searchInput (keyup)="search(searchInput.value)">
+      <h5 class="white light">ESTIMATED WAIT TIME: {{getWaitTime()}}</h5>
     </div>
   </div>
 </div>

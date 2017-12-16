@@ -77,3 +77,23 @@ input {
   padding: 5vh 10vw;
   width: 80vw;
 }
+
+.name {
+  text-align: center;
+  color: white;
+  margin-top: 4vh;
+  padding: 10vw;
+}
+
+.controls {
+  margin-top: 5vh;
+  padding: 0px 11vw;
+}
+
+.cancel {
+  float: left;
+}
+
+.ok {
+  float: right;
+}

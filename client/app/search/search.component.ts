@@ -11,9 +11,14 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
 export class SearchComponent {
   loading: boolean = false;
   songs: Array<Result> = [];
+  selectedSong: Song;
   searchText: string = '';
 
   constructor(private karaoke: KaraokeService, private router: Router) {}
+
+  private hasName(name: string) {
+    return name && name.trim();
+  }
 
   private hasNoSearch() {
     return this.searchText === '';
@@ -21,6 +26,15 @@ export class SearchComponent {
 
   private hasNoSongs() {
     return this.songs.length === 0 && !this.loading && !this.hasNoSearch();
+  }
+
+  private onCancel() {
+    this.selectedSong = null;
+  }
+
+  private onOK(name: string) {
+    this.selectedSong['userName'] = name;
+    this.karaoke.queueSong(this.selectedSong).subscribe(() => this.router.navigateByUrl('/list'));
   }
 
   private processSearch(results) {
@@ -37,7 +51,7 @@ export class SearchComponent {
   }
 
   private queueSong(song: Song) {
-    this.karaoke.queueSong(song).subscribe(() => this.router.navigateByUrl('/list'));
+    this.selectedSong = song;
   }
 
   private search(text: string) {

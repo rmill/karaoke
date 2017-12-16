@@ -4,15 +4,23 @@
     <a routerLink="/list">GO BACK</a>
     <div class="search">
       <h2 class="red">FIND A SONG</h2>
-      <input #searchInput placeholder="Search song" (keyup)="search(searchInput.value)">
+      <input #searchInput (keyup)="search(searchInput.value)">
     </div>
   </div>
 </div>
-<div>
+<div *ngIf="!selectedSong">
   <div *ngFor="let song of songs" (click)="queueSong(song)" class="song">
     <img src="{{song.thumbnail}}">
     <div class="song-content">
       <h5>{{song.name}}</h5>
     </div>
+  </div>
+</div>
+<div *ngIf="selectedSong" class="name">
+  <h1>ENTER YOUR NAME</h1>
+  <input #name>
+  <div class="controls">
+    <h4 class="cancel" (click)="onCancel()">CANCEL</h4>
+    <h4 *ngIf="hasName(name.value)" class="ok" (click)="onOK(name.value)">OK</h4>
   </div>
 </div>

@@ -45,6 +45,14 @@ hr {
   height: 30vh;
 }
 
+.one-song .song {
+  padding-top: 6vh;
+}
+
+.two-song {
+  padding-top: .1vh;
+}
+
 .song {
   margin: 4vh 0;
 }

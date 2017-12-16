@@ -8,7 +8,7 @@
 <div *ngIf="isInit" class="content-wrapper">
   <div class="content">
     <div class="no-songs" *ngIf="songs.length === 0">OMG nobody is singing!</div>
-    <div *ngIf="songs.length > 0" [class.one-song]="songs.length === 1">
+    <div *ngIf="songs.length > 0" [class.one-song]="songs.length === 1" [class.two-song]="songs.length === 2">
       <div class="song">
         <h2>NOW PLAYING</h2>
         <h2>{{songs[0].name}}</h2>

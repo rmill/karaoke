@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "build": "ng build --app client --env prod",
-    "client": "ng serve --app client --port 4201",
-    "player": "ng serve --app player --port 4200",
+    "client": "ng serve --app client --port 4201 --host 0.0.0.0",
+    "player": "ng serve --app player --port 4200 --host 0.0.0.0",
     "server": "node server/index.js",
     "lint": "ng lint"
   },

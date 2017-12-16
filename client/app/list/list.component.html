@@ -5,7 +5,7 @@
     <h1 class="red">RAT KING KARAOKE</h1>
   </div>
 </div>
-<div *ngIf="isInit">
+<div *ngIf="isInit" class="content-wrapper">
   <div class="content">
     <div class="no-songs" *ngIf="songs.length === 0">OMG nobody is singing!</div>
     <div *ngIf="songs.length > 0" [class.one-song]="songs.length === 1">

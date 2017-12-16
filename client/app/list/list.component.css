@@ -29,6 +29,11 @@ hr {
   margin: 6vh 8vh
 }
 
+.content-wrapper {
+  position: relative;
+  top: -6vh;
+}
+
 .no-songs {
   vertical-align: middle;
   font-size: 6vh;

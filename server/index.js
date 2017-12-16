@@ -21,6 +21,7 @@ app.post('/next', (req, res) => {
 });
 
 app.get('/songs', (req, res) => {
+  console.log(songQueue);
   res.end(JSON.stringify(songQueue));
 })
 

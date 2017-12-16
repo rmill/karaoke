@@ -34,22 +34,26 @@ h1, h2, h3, h4, h5 {
 
 h1 {
   font-size: 5vh;
+  line-height: 5vh;
 }
 
 h2 {
   font-size: 3.5vh;
+  line-height: 3.5vh;
 }
 
 h4 {
+  line-height: 2.8vh;
   font-size: 2.8vh;
 }
 
 h5 {
+  line-height: 2.2vh;
   font-size: 2.2vh;
 }
 
 .button {
-  width: 58vw;
+  width: 33vh;
 }
 
 .button:active {

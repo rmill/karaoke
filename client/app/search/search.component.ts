@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 
 import { AuthService } from '../../../lib/auth.service';
 import { KaraokeService, Song } from '../../../lib/karaoke.service';
@@ -11,15 +12,27 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
 })
 export class SearchComponent {
   loading: boolean = false;
-  songs: Array<Result> = [];
-  selectedSong: Song;
   searchText: string = '';
+  searchSub: Subscription;
+  selectedSong: Song;
+  songs: Array<Result> = [];
+
+  private searchSource: Subject<string> = new Subject<string>();
 
   constructor(
     private auth: AuthService,
     private karaoke: KaraokeService,
     private router: Router
-  ) {}
+  ) {
+    const searchObs = this.searchSource.debounceTime(500).distinctUntilChanged();
+    this.searchSub = searchObs.subscribe((searchText: string) => {
+      this.karaoke.search(searchText).subscribe(
+        (results) => this.processSearch(results),
+        () => this.loading = false,
+        () => this.loading = false
+      );
+    });
+  }
 
   private hasName(name: string) {
     return name && name.trim();
@@ -74,11 +87,7 @@ export class SearchComponent {
       text += ' karaoke';
     }
 
-    this.karaoke.search(text).subscribe(
-      (results) => this.processSearch(results),
-      () => this.loading = false,
-      () => this.loading = false
-    );
+    this.searchSource.next(text);
   }
 }
 

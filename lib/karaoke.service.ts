@@ -49,7 +49,7 @@ export class KaraokeService {
    * Search YouTube for videos
    */
   public search(text: string) {
-    const url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDKWqWZpJd6plpFEkXWmhRypm1XA3gNm9g&q=';
+    const url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&maxResults=15&key=AIzaSyDKWqWZpJd6plpFEkXWmhRypm1XA3gNm9g&q=';
     return this.http.get(url + encodeURIComponent(text));
   }
 

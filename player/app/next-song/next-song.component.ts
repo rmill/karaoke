@@ -44,8 +44,6 @@ export class NextSongComponent {
 
   private processQueue(queue: Array<Song>) {
     if (queue.length > 0) {
-      console.log('queue', queue[0]);
-      console.log('song', this.song);
       if (!this.song) {
         // Show the song we are waiting for
         this.song = queue[0];

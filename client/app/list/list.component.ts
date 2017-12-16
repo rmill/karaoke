@@ -11,6 +11,7 @@ import { KaraokeService, Song } from '../../../lib/karaoke.service';
 })
 export class ListComponent {
   private isInit: boolean = false;
+  private skipPending: boolean = false;
   private songs: Array<Song>;
   private yourSong: Song;
 
@@ -33,5 +34,15 @@ export class ListComponent {
     this.yourSong = yourSong;
     this.songs = queue;
     this.isInit = true;
+  }
+
+  private showSkip() {
+    return !this.skipPending && this.auth.user.isHost && this.songs.length > 0;
+  }
+
+  private skip() {
+    this.skipPending = true;
+    this.karaoke.next();
+    setTimeout(() => this.skipPending = false, 3000);
   }
 }

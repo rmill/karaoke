@@ -51,3 +51,8 @@ hr {
 .youre-up {
   margin-top: 11vh;
 }
+
+.skip {
+  margin-top: 3vh;
+  text-decoration: underline;
+}

@@ -35,14 +35,14 @@ export class KaraokeService {
    * Go to the next song
    */
   public next() {
-    this.http.post('http://localhost:3000/next', null, { headers: this.headers }).subscribe(() => null);
+    return this.http.post(`${this.env.get('apiUrl')}/next`, null, { headers: this.headers }).subscribe(() => null);
   }
 
   /**
    * Add a song to the queue
    */
   public queueSong(song: Song) {
-    return this.http.post('http://localhost:3000/song', song, { headers: this.headers });
+    return this.http.post(`${this.env.get('apiUrl')}/song`, song, { headers: this.headers });
   }
 
   /**

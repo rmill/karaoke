@@ -26,4 +26,5 @@
     <img *ngIf="!hasSong()" class="button" routerLink="/search" src="../../assets/request.png">
     <div *ngIf="hasSong()" class="youre-up">You're up in about 10 mins</div>
   </div>
+  <div *ngIf="showSkip()" (click)="skip()" class="skip">SKIP CURRENT SONG</div>
 </div>

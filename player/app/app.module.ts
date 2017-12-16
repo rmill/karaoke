@@ -8,8 +8,9 @@ import { IdleComponent } from './idle/idle.component';
 import { NextSongComponent } from './next-song/next-song.component';
 import { PlayerComponent } from './player/player.component';
 import { VoiceService } from './services/voice.service';
-import { KaraokeService } from '../../lib/karaoke.service';
 import { AuthService } from '../../lib/auth.service';
+import { EnvService } from '../../lib/env.service';
+import { KaraokeService } from '../../lib/karaoke.service';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/idle' },
@@ -30,7 +31,12 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [ AuthService, KaraokeService, VoiceService ],
+  providers: [
+    AuthService,
+    EnvService,
+    KaraokeService,
+    VoiceService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

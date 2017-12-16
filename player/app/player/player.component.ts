@@ -29,7 +29,7 @@ export class PlayerComponent {
     ) {}
 
     ngOnInit() {
-      const options = { controls: 0, fs: 0, iv_load_policy: 3, modestbranding: 1, rel: 0, showinfo: 0 };
+      const options = { controls: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, rel: 0, showinfo: 0 };
       this.player = YouTubePlayer('player', { playerVars: options });
       this.player.on('stateChange', (event) => this.target = event.target);
       this.player.on('error', (err) => this.onError(err));
@@ -71,9 +71,12 @@ export class PlayerComponent {
     }
 
     private processTime() {
-      if (this.target && this.target.getDuration() > 0) {
+      if (this.target && this.target.getDuration() > 0 && this.currentSong.id) {
         this.timeRemaining = this.target.getDuration() - this.target.getCurrentTime();
-        if (this.timeRemaining <= 3) this.karaoke.next();
+        if (this.timeRemaining <= 3) {
+          this.currentSong.id = null;
+          this.karaoke.next();
+        }
       }
     }
 

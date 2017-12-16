@@ -44,14 +44,16 @@ export class NextSongComponent {
 
   private processQueue(queue: Array<Song>) {
     if (queue.length > 0) {
+      console.log('queue', queue[0]);
+      console.log('song', this.song);
       if (!this.song) {
         // Show the song we are waiting for
         this.song = queue[0];
         this.timeSub = Observable.interval(1000).subscribe(() => this.decreaseTime());
-        this.voice.speak(`Coming up next. ${this.song.userName} is singing ${this.song.name}`);
+        this.voice.nextSong(this.song.userName, this.song.name);
       } else if(this.song.id !== queue[0].id) {
         // The song has been cancelled, reload the component
-        this.router.navigateByUrl('/next-song');
+        window.location.reload();
       }
     } else {
       // No songs left, go to the idle screen
